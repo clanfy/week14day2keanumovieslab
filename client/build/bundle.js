@@ -49,12 +49,10 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
 	
+	var MovieContainer = __webpack_require__(159);
+	
 	window.onload = function () {
-	  ReactDOM.render(React.createElement(
-	    'h1',
-	    null,
-	    ' App Started '
-	  ), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(MovieContainer, null), document.getElementById('app'));
 	};
 
 /***/ },
@@ -19750,6 +19748,152 @@
 	
 	module.exports = __webpack_require__(3);
 
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var MovieSelector = __webpack_require__(160);
+	var MovieDetail = __webpack_require__(161);
+	
+	var MovieContainer = React.createClass({
+	  displayName: 'MovieContainer',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      movies: [],
+	      focusMovie: null
+	    };
+	  },
+	
+	  componentDidMount: function componentDidMount() {
+	    var url = "http://netflixroulette.net/api/api.php?actor=Keanu%20Reeves";
+	    var request = new XMLHttpRequest();
+	    request.open('GET', url);
+	    request.onload = function () {
+	      var data = JSON.parse(request.responseText);
+	      this.setState({ movies: data });
+	    }.bind(this);
+	    request.send(null);
+	  },
+	
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Keanu Reeves Kontainer'
+	      ),
+	      React.createElement(MovieSelector, {
+	        movies: this.state.movies,
+	        selectMovie: this.setFocusMovie
+	      }),
+	      React.createElement(MovieDetail, { movie: this.state.focusMovie })
+	    );
+	  },
+	
+	  setFocusMovie: function setFocusMovie(movie) {
+	    this.setState({ focusMovie: movie });
+	  }
+	});
+	
+	module.exports = MovieContainer;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(1);
+	
+	var MovieSelector = React.createClass({
+	  displayName: "MovieSelector",
+	
+	
+	  getInitalState: function getInitalState() {
+	    return { selectedIndex: undefined };
+	  },
+	
+	  render: function render() {
+	    var options = this.props.movies.map(function (movie, index) {
+	      return React.createElement(
+	        "option",
+	        { value: index, key: index },
+	        " ",
+	        movie.show_title,
+	        " "
+	      );
+	    });
+	    return React.createElement(
+	      "select",
+	      {
+	        id: "movies",
+	
+	        onChange: this.handleChange },
+	      React.createElement(
+	        "option",
+	        null,
+	        "Movie Selector"
+	      ),
+	      options
+	    );
+	  },
+	
+	  handleChange: function handleChange(event) {
+	    var newIndex = parseInt(event.target.value);
+	    this.setState({ selectedIndex: newIndex });
+	    var movie = this.props.movies[newIndex];
+	    this.props.selectMovie(movie);
+	  }
+	
+	});
+	
+	module.exports = MovieSelector;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var MovieDetail = function MovieDetail(props) {
+	  if (!props.movie) {
+	    return React.createElement(
+	      'h3',
+	      null,
+	      'Pick a Keanu Reeves Movie'
+	    );
+	  }
+	  return React.createElement(
+	    'div',
+	    { className: 'movie-detail' },
+	    React.createElement(
+	      'h3',
+	      null,
+	      props.movie.show_title
+	    ),
+	    React.createElement(
+	      'p',
+	      null,
+	      'Category: ',
+	      props.movie.category,
+	      React.createElement('br', null),
+	      'Summary: ',
+	      props.movie.summary
+	    ),
+	    React.createElement('img', { src: props.movie.poster })
+	  );
+	};
+	
+	module.exports = MovieDetail;
 
 /***/ }
 /******/ ]);
