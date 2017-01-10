@@ -19773,7 +19773,7 @@
 	  componentDidMount: function componentDidMount() {
 	    var url = "http://netflixroulette.net/api/api.php?actor=Keanu%20Reeves";
 	    var request = new XMLHttpRequest();
-	    request.open('GET', url);
+	    request.open("GET", url);
 	    request.onload = function () {
 	      var data = JSON.parse(request.responseText);
 	      this.setState({ movies: data });
@@ -19783,6 +19783,10 @@
 	
 	  handleClick: function handleClick() {
 	    console.log("Bill and Ted's Excellent Adventures");
+	  },
+	
+	  setFocusMovie: function setFocusMovie(movie) {
+	    this.setState({ focusMovie: movie });
 	  },
 	
 	  render: function render() {
@@ -19801,11 +19805,8 @@
 	      React.createElement(MovieDetail, { movie: this.state.focusMovie }),
 	      React.createElement(MovieButton, { handleClick: this.handleClick })
 	    );
-	  },
-	
-	  setFocusMovie: function setFocusMovie(movie) {
-	    this.setState({ focusMovie: movie });
 	  }
+	
 	});
 	
 	module.exports = MovieContainer;
@@ -19822,8 +19823,16 @@
 	  displayName: "MovieSelector",
 	
 	
-	  getInitalState: function getInitalState() {
+	  getInitialState: function getInitialState() {
 	    return { selectedIndex: undefined };
+	  },
+	
+	  handleChange: function handleChange(event) {
+	    event.preventDefault();
+	    var newIndex = parseInt(event.target.value);
+	    this.setState({ selectedIndex: newIndex });
+	    var movie = this.props.movies[newIndex];
+	    this.props.selectMovie(movie);
 	  },
 	
 	  render: function render() {
@@ -19838,9 +19847,9 @@
 	    });
 	    return React.createElement(
 	      "select",
-	      { id: "movies"
-	        // value={this.state.selectedIndex} 
-	        , onChange: this.handleChange },
+	      { id: "movies",
+	        value: this.state.selectedIndex,
+	        onChange: this.handleChange },
 	      React.createElement(
 	        "option",
 	        null,
@@ -19848,14 +19857,6 @@
 	      ),
 	      options
 	    );
-	  },
-	
-	  handleChange: function handleChange(event) {
-	    var newIndex = parseInt(event.target.value);
-	
-	    this.setState({ selectedIndex: newIndex });
-	    var movie = this.props.movies[newIndex];
-	    this.props.selectMovie(movie);
 	  }
 	
 	});

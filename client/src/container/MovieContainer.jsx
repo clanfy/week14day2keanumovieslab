@@ -8,13 +8,13 @@ var MovieContainer = React.createClass({
     return {
       movies: [],
       focusMovie: null
-    };
+    }
   },
 
   componentDidMount: function() {
     var url = "http://netflixroulette.net/api/api.php?actor=Keanu%20Reeves";
     var request = new XMLHttpRequest();
-    request.open('GET', url);
+    request.open("GET", url);
     request.onload = function() {
       var data = JSON.parse(request.responseText);
       this.setState({movies: data});
@@ -24,6 +24,10 @@ var MovieContainer = React.createClass({
 
   handleClick: function(){
     console.log("Bill and Ted's Excellent Adventures");
+  },
+
+  setFocusMovie: function(movie) {
+    this.setState({focusMovie: movie})
   },
 
   render: function() {
@@ -38,11 +42,8 @@ var MovieContainer = React.createClass({
         <MovieButton handleClick={this.handleClick}/>
       </div>
       );
-  },
-
-  setFocusMovie: function(movie) {
-    this.setState({focusMovie: movie})
   }
+
 });
 
 module.exports = MovieContainer;

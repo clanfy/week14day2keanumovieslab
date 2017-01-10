@@ -2,8 +2,16 @@ var React = require('react');
 
 var MovieSelector = React.createClass({
 
-  getInitalState: function(){
+  getInitialState: function(){
     return { selectedIndex: undefined };
+  },
+
+  handleChange: function(event){
+    event.preventDefault();
+    var newIndex = parseInt(event.target.value)
+    this.setState({selectedIndex: newIndex})
+    var movie = this.props.movies[newIndex]
+    this.props.selectMovie(movie);
   },
 
   render: function (){
@@ -12,21 +20,15 @@ var MovieSelector = React.createClass({
     });
     return (
       <select id="movies" 
-      // value={this.state.selectedIndex} 
+      value={this.state.selectedIndex} 
       onChange={this.handleChange}>
       <option>Select a righteous movie! </option>
         {options}
       </select>
       );
-  },
-
-  handleChange: function(event){
-    var newIndex = parseInt(event.target.value)
-
-    this.setState({selectedIndex: newIndex})
-    var movie = this.props.movies[newIndex]
-    this.props.selectMovie(movie);
   }
+
+
 
 });
 
