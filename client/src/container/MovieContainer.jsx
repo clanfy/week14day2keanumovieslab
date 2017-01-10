@@ -23,7 +23,7 @@ var MovieContainer = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className='kontainer'>
         <h2>Keanu Reeves Kontainer</h2>
         <MovieSelector
         movies={this.state.movies}

@@ -19783,7 +19783,7 @@
 	  render: function render() {
 	    return React.createElement(
 	      'div',
-	      null,
+	      { className: 'kontainer' },
 	      React.createElement(
 	        'h2',
 	        null,
@@ -19832,21 +19832,16 @@
 	    });
 	    return React.createElement(
 	      "select",
-	      {
-	        id: "movies",
-	
-	        onChange: this.handleChange },
-	      React.createElement(
-	        "option",
-	        null,
-	        "Movie Selector"
-	      ),
+	      { id: "movies"
+	        // value={this.state.selectedIndex} 
+	        , onChange: this.handleChange },
 	      options
 	    );
 	  },
 	
 	  handleChange: function handleChange(event) {
 	    var newIndex = parseInt(event.target.value);
+	
 	    this.setState({ selectedIndex: newIndex });
 	    var movie = this.props.movies[newIndex];
 	    this.props.selectMovie(movie);
