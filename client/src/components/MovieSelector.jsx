@@ -14,6 +14,7 @@ var MovieSelector = React.createClass({
       <select id="movies" 
       // value={this.state.selectedIndex} 
       onChange={this.handleChange}>
+      <option>Select a righteous movie! </option>
         {options}
       </select>
       );

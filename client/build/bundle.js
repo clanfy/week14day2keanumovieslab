@@ -19841,6 +19841,11 @@
 	      { id: "movies"
 	        // value={this.state.selectedIndex} 
 	        , onChange: this.handleChange },
+	      React.createElement(
+	        "option",
+	        null,
+	        "Select a righteous movie! "
+	      ),
 	      options
 	    );
 	  },
