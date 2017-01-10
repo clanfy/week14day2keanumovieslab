@@ -19758,6 +19758,7 @@
 	var React = __webpack_require__(1);
 	var MovieSelector = __webpack_require__(160);
 	var MovieDetail = __webpack_require__(161);
+	var MovieButton = __webpack_require__(162);
 	
 	var MovieContainer = React.createClass({
 	  displayName: 'MovieContainer',
@@ -19780,6 +19781,10 @@
 	    request.send(null);
 	  },
 	
+	  handleClick: function handleClick() {
+	    console.log("Clicked");
+	  },
+	
 	  render: function render() {
 	    return React.createElement(
 	      'div',
@@ -19793,7 +19798,8 @@
 	        movies: this.state.movies,
 	        selectMovie: this.setFocusMovie
 	      }),
-	      React.createElement(MovieDetail, { movie: this.state.focusMovie })
+	      React.createElement(MovieDetail, { movie: this.state.focusMovie }),
+	      React.createElement(MovieButton, { handleClick: this.handleClick })
 	    );
 	  },
 	
@@ -19889,6 +19895,30 @@
 	};
 	
 	module.exports = MovieDetail;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var MovieButton = function MovieButton(props) {
+	
+	  return React.createElement(
+	    'div',
+	    { className: 'movie-button' },
+	    React.createElement(
+	      'button',
+	      { className: 'btn-movie',
+	        onClick: props.handleClick },
+	      ' Random Keanu Movie! >>'
+	    )
+	  );
+	};
+	
+	module.exports = MovieButton;
 
 /***/ }
 /******/ ]);

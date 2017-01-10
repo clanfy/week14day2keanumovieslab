@@ -1,6 +1,7 @@
 var React = require('react');
 var MovieSelector = require('../components/MovieSelector');
 var MovieDetail = require('../components/MovieDetail');
+var MovieButton = require('../components/MovieButton');
 
 var MovieContainer = React.createClass({
   getInitialState: function() {
@@ -21,6 +22,10 @@ var MovieContainer = React.createClass({
     request.send(null);
   },
 
+  handleClick: function(){
+    console.log("Clicked");
+  },
+
   render: function() {
     return (
       <div className='kontainer'>
@@ -30,6 +35,7 @@ var MovieContainer = React.createClass({
         selectMovie={this.setFocusMovie}
         />
         <MovieDetail movie={this.state.focusMovie}/>
+        <MovieButton handleClick={this.handleClick}/>
       </div>
       );
   },
