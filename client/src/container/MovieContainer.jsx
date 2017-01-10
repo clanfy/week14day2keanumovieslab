@@ -23,7 +23,7 @@ var MovieContainer = React.createClass({
   },
 
   handleClick: function(){
-    console.log("Clicked");
+    console.log("Bill and Ted's Excellent Adventures");
   },
 
   render: function() {

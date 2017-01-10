@@ -19782,7 +19782,7 @@
 	  },
 	
 	  handleClick: function handleClick() {
-	    console.log("Clicked");
+	    console.log("Bill and Ted's Excellent Adventures");
 	  },
 	
 	  render: function render() {
@@ -19891,6 +19891,11 @@
 	      null,
 	      'Category: ',
 	      props.movie.category,
+	      React.createElement('br', null),
+	      'Year: ',
+	      props.movie.release_year,
+	      ' --- Rating: ',
+	      props.movie.rating,
 	      React.createElement('br', null),
 	      'Summary: ',
 	      props.movie.summary
